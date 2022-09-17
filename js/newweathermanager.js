@@ -7,7 +7,7 @@ function spinything() {
     rotatez = (Math.floor(-100 + Math.random()*(100 + 1 - -100)))/100
     $("#headendid").text("headend id: 0"+Math.round(Math.random()*100000))
     $("#serialnumber").text("serial number: TWCS"+"0"+Math.round(Math.random()*100000000))
-    $("#affilatename").text("affiliatename: Windev Systems Cable")
+    $("#affilatename").text("affiliatename: WeatherPages Personal Cable")
     $(".intellistarlogo").css( { transition: `transform 5s linear`,
     transform: `rotate3d(${rotatex}, ${rotatey}, ${rotatez}, ${.25 + Math.random()}turn)` } );
     setTimeout(function () {
@@ -339,7 +339,7 @@ var weatherInfo = { currentCond: {
   radarTempUnavialable: false,
   radarWinterLegend: false,
   reboot: false,
-  ad: "The Weather Channel is now available on HD Channel 21. | Save $5.00 a month with easy, painless auto pay system. Sign up Today! | Hate ugly cables everywhere? Upgrade to our brand new TiVO system with no Wires! Call us today for details. | You are watching Windev Cable. Weatherscan is a 24/7 weather forecast service. | HD Radio stations can have a cable feed! Inquire about it by calling now! | No Alerts Active for Seattle"
+  ad: "Welcome to WeatherPages. This is powered by the almighty Windev So-called shitty cable. BUY ME NOW!!!111 COSTZ 5 BUIKS FOR A FUCKJING SHIT CABLE AND SUPPORTIMNG AUTISM LOLZ. this is actually powered by github pages"
 }
 
 //start data functions. these are run after their respective location functions finish
