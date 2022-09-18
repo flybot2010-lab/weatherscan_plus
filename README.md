@@ -1,4 +1,4 @@
-were movimg from pages to frde web hosting cuz no php real
+
 # Weatherscan Simulator
 Weatherscan simulation in HTML/JS/CSS
 
