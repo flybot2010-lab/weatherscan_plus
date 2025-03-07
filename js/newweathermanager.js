@@ -913,7 +913,7 @@ function grabHealthData() {
   })
 }
 function grabAirportDelayData() {
-    $.getJSON('https://airport.weatherscan.tk/https://nasstatus.faa.gov/api/airport-events', function(eventdata) {
+    $.getJSON('https://nasstatus.faa.gov/api/airport-events', function(eventdata) {
       for (const airportevent of eventdata) {
         var airportdelay = {iata:"",type:"",amount:"",reason:""}
         if (airportevent.airportClosure) {
