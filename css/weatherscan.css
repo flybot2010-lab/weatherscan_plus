@@ -1,25 +1,25 @@
 @font-face {
 	font-family: Interstate;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/Interstate-Bold3.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/Interstate-Bold3.woff) format("woff");
 	font-weight: 700
 }
 
 @font-face {
 	font-family: Interstate;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/Interstate-Bold5.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/Interstate-Bold5.woff) format("woff");
 	font-weight: 800
 }
 
 @font-face {
 	font-family: interstate mono;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/InterstateMono.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/InterstateMono.woff) format("woff");
 	font-weight: 400;
 	font-style: normal
 }
 
 @font-face {
 	font-family: interstate boldcn;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/Interstate-BoldCondensed.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/Interstate-BoldCondensed.woff) format("woff");
 	font-weight: 700;
 	font-style: normal;
 	font-stretch: condensed
@@ -27,7 +27,7 @@
 
 @font-face {
 	font-family: interstate cn;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/Interstate-RegularCondensed.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/Interstate-RegularCondensed.woff) format("woff");
 	font-weight: 400;
 	font-style: normal;
 	font-stretch: condensed
@@ -35,21 +35,21 @@
 
 @font-face {
 	font-family: Interstate;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/Interstate-Regular.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/Interstate-Regular.woff) format("woff");
 	font-weight: 400 500;
 	font-style: normal
 }
 
 @font-face {
 	font-family: interstate2;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/Interstate-Regular.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/Interstate-Regular.woff) format("woff");
 	font-weight: 400;
 	font-style: normal
 }
 
 @font-face {
 	font-family: zemestro std;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/ZemestroStd.woff2) format("woff2"), url(https://haydenwalker980.github.io/Weatherscan/fonts/ZemestroStd.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/ZemestroStd.woff2) format("woff2"), url(/weatherscan_plus/fonts/ZemestroStd.woff) format("woff");
 	font-weight: 400;
 	font-style: normal
 }
@@ -59,45 +59,45 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url(https:/https://haydenwalker980.github.io/Weatherscan/fonts.gstatic.com/s/encodesansexpanded/v8/c4m_1mF4GcnstG_Jh1QH6ac4hNLeNyeYUpolKQZidIAa.woff2) format('woff');
+	src: url(https://weatherscan_plus/fonts.gstatic.com/s/encodesansexpanded/v8/c4m_1mF4GcnstG_Jh1QH6ac4hNLeNyeYUpolKQZidIAa.woff2) format('woff');
 	unicode-range: U+2191, U+2193
 }
 
 @font-face {
 	font-family: Frutiger;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/Frutiger.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/Frutiger.woff) format("woff");
 	font-weight: 400;
 	font-style: normal
 }
 
 @font-face {
 	font-family: Frutiger;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/Frutiger_bold.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/Frutiger_bold.woff) format("woff");
 	font-weight: 700;
 	font-style: normal
 }
 
 @font-face {
 	font-family: frutiger lt;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/FrutigerLT-66BdIt.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/FrutigerLT-66BdIt.woff) format("woff");
 	font-style: italic
 }
 
 @font-face {
 	font-family: 'frutiger 57 condensed';
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/Frutiger-57Cn.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/Frutiger-57Cn.woff) format("woff");
 	font-style: normal
 }
 
 @font-face {
 	font-family: frutiger bold cn;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/FrutigerBoldCn.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/FrutigerBoldCn.woff) format("woff");
 	font-style: normal
 }
 
 @font-face {
 	font-family: frutiger bq;
-	src: url(https://haydenwalker980.github.io/Weatherscan/fonts/newfonts/FrutigerCondensedBQ-Black.woff) format("woff");
+	src: url(/weatherscan_plus/fonts/newfonts/FrutigerCondensedBQ-Black.woff) format("woff");
 	font-style: normal
 }
 
@@ -849,22 +849,22 @@
 }
 
 .info-slide-content.severe-almanac .frost-pane.purple .phase.i .icon {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pageshttps://haydenwalker980.github.io/Weatherscan/images/icons/moonphases/new.png)
+	background-image: url(/weatherscan_plus/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pages/weatherscan_plus/images/icons/moonphases/new.png)
 }
 
 .info-slide-content.severe-almanac .frost-pane.purple .phase.ii .icon {
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pageshttps://haydenwalker980.github.io/Weatherscan/images/icons/moonphases/half1.png)
+	background-image: url(/weatherscan_plus/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pages/weatherscan_plus/images/icons/moonphases/half1.png)
 }
 
 .info-slide-content.severe-almanac .frost-pane.purple .phase.iii .icon {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pageshttps://haydenwalker980.github.io/Weatherscan/images/icons/moonphases/full.png)
+	background-image: url(/weatherscan_plus/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pages/weatherscan_plus/images/icons/moonphases/full.png)
 }
 
 .info-slide-content.severe-almanac .frost-pane.purple .phase.iv .icon {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pageshttps://haydenwalker980.github.io/Weatherscan/images/icons/moonphases/half2.png)
+	background-image: url(/weatherscan_plus/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pages/weatherscan_plus/images/icons/moonphases/half2.png)
 }
 
 .info-slide-content.severe-almanac .frost-pane.purple .phase .date {
@@ -928,7 +928,7 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pageshttps://haydenwalker980.github.io/Weatherscan/images/icons/26.png);
+	background-image: url(/weatherscan_plus/images/ttps://github.com/haydenwalker980/Weatherscan/raw/pages/weatherscan_plus/images/icons/26.png);
 	position: absolute;
 	left: 475px;
 	top: 50%;
@@ -1688,22 +1688,22 @@
 }
 
 .info-slide-content.almanac .frost-pane.purple .phase.i .icon {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/moonphases/new.png)
+	background-image: url(/weatherscan_plus/images/icons/moonphases/new.png)
 }
 
 .info-slide-content.almanac .frost-pane.purple .phase.ii .icon {
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/moonphases/half1.png)
+	background-image: url(/weatherscan_plus/images/icons/moonphases/half1.png)
 }
 
 .info-slide-content.almanac .frost-pane.purple .phase.iii .icon {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/moonphases/full.png)
+	background-image: url(/weatherscan_plus/images/icons/moonphases/full.png)
 }
 
 .info-slide-content.almanac .frost-pane.purple .phase.iv .icon {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/moonphases/half2.png)
+	background-image: url(/weatherscan_plus/images/icons/moonphases/half2.png)
 }
 
 .info-slide-content.almanac .frost-pane.purple .phase .date {
@@ -1767,7 +1767,7 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/26.png);
+	background-image: url(/weatherscan_plus/images/icons/26.png);
 	position: absolute;
 	left: 475px;
 	top: 50%;
@@ -2093,7 +2093,7 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/26.png);
+	background-image: url(/weatherscan_plus/images/icons/26.png);
 	position: fixed;
 	left: 510px;
 	height: 120px;
@@ -2454,7 +2454,7 @@
 	height: 52%;
 	position: absolute;
 	top: -10px;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/24.png)
+	background-image: url(/weatherscan_plus/images/icons/24.png)
 }
 
 .info-slide-content.health-forecast .frost-pane.mainforecast .low {
@@ -2995,7 +2995,7 @@
 	text-shadow: 2px 2px 4px #000;
 	width: 100px;
 	height: 80px;
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/yes2.svg);
+	background: url(/weatherscan_plus/images/yes2.svg);
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center
@@ -3040,7 +3040,7 @@
 	top: 7px;
 	width: 115px;
 	height: 103px;
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/check.svg);
+	background: url(/weatherscan_plus/images/check.svg);
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center
@@ -3272,7 +3272,7 @@
 	top: 6px;
 	width: 115px;
 	height: 103px;
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/check.svg);
+	background: url(/weatherscan_plus/images/check.svg);
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center
@@ -3335,7 +3335,7 @@
 
 .info-slide-content.moreinfoimage .frost-pane {
 	background-color: transparent;
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/moreinfohealth.png);
+	background: url(/weatherscan_plus/images/moreinfohealth.png);
 	background-repeat: no-repeat;
 	background-size: contain
 }
@@ -3427,7 +3427,7 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/01.png);
+	background-image: url(/weatherscan_plus/images/icons/01.png);
 	position: absolute;
 	top: 37px
 }
@@ -3546,7 +3546,7 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/01.png);
+	background-image: url(/weatherscan_plus/images/icons/01.png);
 	position: absolute;
 	top: 35px;
 	left: -8px
@@ -3629,7 +3629,7 @@
 
 .info-slide-content.golfmoreinfoimage .frost-pane {
 	background-color: transparent;
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/golffinalimage.png);
+	background: url(/weatherscan_plus/images/golffinalimage.png);
 	background-repeat: no-repeat;
 	background-size: contain
 }
@@ -3705,7 +3705,7 @@
 	width: 100%;
 	height: 180px;
 	top: -13px;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/icons/01.png)
+	background-image: url(/weatherscan_plus/images/icons/01.png)
 }
 
 .info-slide-content.gardenindex .frost-pane.left .lowtitle {
@@ -3838,7 +3838,7 @@
 
 .info-slide-content.gardenmoreinfoimage .frost-pane {
 	background-color: transparent;
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/gardenfinalimage.png);
+	background: url(/weatherscan_plus/images/gardenfinalimage.png);
 	background-repeat: no-repeat;
 	background-size: 123% 115%;
 	background-position: 55% 93%;
@@ -4477,7 +4477,7 @@ label {
 
 .city-info-slide {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/bluebuildings.jpg) no-repeat;
+	background: transparent url(/weatherscan_plus/images/bluebuildings.jpg) no-repeat;
 	background-position: 0% 100%;
 	background-size: 103% 106%
 }
@@ -4490,7 +4490,7 @@ label {
 }
 
 .city-info-slide .yellow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/yellow-curve.svg);
+	background-image: url(/weatherscan_plus/images/yellow-curve.svg);
 	-webkit-filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75));
 	filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75))
 }
@@ -4505,7 +4505,7 @@ label {
 }
 
 .city-info-slide .yellow.right {
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/bluebuildings.jpg) no-repeat;
+	background: url(/weatherscan_plus/images/bluebuildings.jpg) no-repeat;
 	background-size: 200% 135%;
 	background-position: 128% -27%;
 	top: -15%;
@@ -4513,7 +4513,7 @@ label {
 	width: 51%;
 	height: 85%;
 	z-index: 7;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/yellow-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/yellow-curve.svg);
 	-webkit-mask-position: 100% 0;
 	-webkit-mask-size: 200% 200%;
 	filter: drop-shadow(-2px 0 4px rgba(0, 0, 0, .75))
@@ -4531,9 +4531,9 @@ label {
 }
 
 .city-info-slide .blue.left {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/bluebuildings.jpg);
+	background-image: url(/weatherscan_plus/images/bluebuildings.jpg);
 	background-size: 465% 71%;
 	background-position: -10% -27.75%;
 	width: 22%;
@@ -4545,9 +4545,9 @@ label {
 }
 
 .city-info-slide .blue.bottom {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/bluebuildings.jpg);
+	background-image: url(/weatherscan_plus/images/bluebuildings.jpg);
 	background-size: 465% 70.5%;
 	background-position: -11.5% 71.6%;
 	width: 22%;
@@ -4559,7 +4559,7 @@ label {
 }
 
 .city-info-slide .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -4571,7 +4571,7 @@ label {
 }
 
 .city-info-slide .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -4590,7 +4590,7 @@ label {
 }
 
 .severe-city-info-slide .yellow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/red-curve-dark.svg);
+	background-image: url(/weatherscan_plus/images/red-curve-dark.svg);
 	-webkit-filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75));
 	filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75))
 }
@@ -4613,7 +4613,7 @@ label {
 	width: 51%;
 	height: 85%;
 	z-index: 7;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/red-curve-severe.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/red-curve-severe.svg);
 	-webkit-mask-position: 100% 0;
 	-webkit-mask-size: 200% 200%;
 	filter: drop-shadow(-2px 0 4px rgba(0, 0, 0, .75))
@@ -4631,7 +4631,7 @@ label {
 }
 
 .severe-city-info-slide .blue.left {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/grey-curve.svg);
+	background-image: url(/weatherscan_plus/images/grey-curve.svg);
 	background-size: 200% 100%;
 	width: 22%;
 	height: 150%;
@@ -4642,7 +4642,7 @@ label {
 }
 
 .severe-city-info-slide .blue.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/grey-curve.svg);
+	background-image: url(/weatherscan_plus/images/grey-curve.svg);
 	background-size: 200% 100%;
 	width: 22%;
 	height: 150%;
@@ -4653,7 +4653,7 @@ label {
 }
 
 .severe-city-info-slide .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -4665,7 +4665,7 @@ label {
 }
 
 .severe-city-info-slide .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -4678,7 +4678,7 @@ label {
 
 .severe-city-info-slide {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/severebuildings.png) no-repeat;
+	background: transparent url(/weatherscan_plus/images/severebuildings.png) no-repeat;
 	background-position: 0% 100%;
 	background-size: 103% 106%
 }
@@ -4691,7 +4691,7 @@ label {
 }
 
 .bulletin .yellow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/red-curve.svg);
+	background-image: url(/weatherscan_plus/images/red-curve.svg);
 	-webkit-filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75));
 	filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75))
 }
@@ -4719,7 +4719,7 @@ label {
 }
 
 .bulletin .blue.left {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/red-curve-dark.svg);
+	background-image: url(/weatherscan_plus/images/red-curve-dark.svg);
 	background-size: 200% 100%;
 	width: 22%;
 	height: 150%;
@@ -4730,7 +4730,7 @@ label {
 }
 
 .bulletin .blue.bottom {
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/warning.png) no-repeat;
+	background: transparent url(/weatherscan_plus/images/warning.png) no-repeat;
 	background-position: -6.1% -30%;
 	width: 22%;
 	height: 150%;
@@ -4738,13 +4738,13 @@ label {
 	left: -9.25%;
 	opacity: 1;
 	z-index: 2;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/red-curve-dark.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/red-curve-dark.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/red-curve-dark.svg);
+	mask-image: url(/weatherscan_plus/images/red-curve-dark.svg);
 	-webkit-mask-size: 200% 100%
 }
 
 .bulletin .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 100%;
 	width: 22%;
@@ -4756,7 +4756,7 @@ label {
 }
 
 .bulletin .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -4769,7 +4769,7 @@ label {
 
 .bulletin {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/warning.png) no-repeat;
+	background: transparent url(/weatherscan_plus/images/warning.png) no-repeat;
 	background-position: 70% 100%;
 	background-size: 101%
 }
@@ -4806,7 +4806,7 @@ label {
 
 .airport-slide-intro {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/airportintroslide.png) no-repeat bottom;
+	background: transparent url(/weatherscan_plus/images/airportintroslide.png) no-repeat bottom;
 	background-position: 0% 92%;
 	background-size: 100% 122%
 }
@@ -4826,8 +4826,8 @@ label {
 
 .info-slide .accent.i {
 	background-color: #7596d2;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	-webkit-mask-position: 100% 0;
 	mask-size: 200% 100%;
@@ -4848,8 +4848,8 @@ label {
 
 .info-slide .accent.ii {
 	background-color: #6b91d7;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	-webkit-mask-position: 100% 0;
 	mask-size: 200% 100%;
@@ -4871,8 +4871,8 @@ label {
 
 .info-slide .accent.iii {
 	background-color: #6b91d7;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	-webkit-mask-position: 100% 0;
 	mask-size: 200% 100%;
@@ -4894,8 +4894,8 @@ label {
 
 .info-slide .accent.iv {
 	background-color: #6b8bc1;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	mask-size: 200% 100%;
 	width: 67.5%;
@@ -4914,8 +4914,8 @@ label {
 
 .info-slide .accent.v {
 	background-color: #5d88e4;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	mask-size: 200% 100%;
 	width: 72.5%;
@@ -4933,8 +4933,8 @@ label {
 
 .info-slide .accent.vi {
 	background-color: #5d88e4;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	mask-size: 200% 100%;
 	width: 72.5%;
@@ -4945,7 +4945,7 @@ label {
 }
 
 .info-slide .accentviishadow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	background-image: url(/weatherscan_plus/images/airport-curve.svg);
 	background-size: 200% 100%;
 	width: 72.5%;
 	height: 227.5%;
@@ -4957,8 +4957,8 @@ label {
 
 .info-slide .accentvii {
 	background-color: #6c8bbf;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	mask-size: 200% 100%;
 	width: 72.5%;
@@ -4976,8 +4976,8 @@ label {
 
 .info-slide .accent.viii {
 	background-color: #5d88e4;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	mask-size: 200% 100%;
 	width: 57.5%;
@@ -5037,7 +5037,7 @@ label {
 
 .health-slide-intro {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/healthintroimage.png) no-repeat bottom;
+	background: transparent url(/weatherscan_plus/images/healthintroimage.png) no-repeat bottom;
 	background-size: cover
 }
 
@@ -5079,7 +5079,7 @@ label {
 
 .beach-slide-intro {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/beachslideintro5.png) no-repeat 100%;
+	background: transparent url(/weatherscan_plus/images/beachslideintro5.png) no-repeat 100%;
 	background-size: 105% 100%
 }
 
@@ -5124,7 +5124,7 @@ label {
 
 .golf-slide-intro {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/golfintro.png) no-repeat 100%;
+	background: transparent url(/weatherscan_plus/images/golfintro.png) no-repeat 100%;
 	background-size: 135% 160%;
 	background-position: 45% 40%
 }
@@ -5170,7 +5170,7 @@ label {
 
 .garden-slide-intro {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/gardenintro.png) no-repeat 100%;
+	background: transparent url(/weatherscan_plus/images/gardenintro.png) no-repeat 100%;
 	background-size: 120.7% 101%;
 	background-position: 69.1% 0%
 }
@@ -5216,7 +5216,7 @@ label {
 
 .ski-slide-intro {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/skiintro.png) no-repeat 100%;
+	background: transparent url(/weatherscan_plus/images/skiintro.png) no-repeat 100%;
 	background-size: 107% 107%;
 	background-position: 110.1% 50%
 }
@@ -5307,7 +5307,7 @@ label {
 
 .city-slide-intro {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/city1.jpg) no-repeat bottom;
+	background: transparent url(/weatherscan_plus/images/city1.jpg) no-repeat bottom;
 	background-size: cover
 }
 
@@ -5349,8 +5349,8 @@ label {
 
 .info-slide .cityaccent.i {
 	background-color: #e5be45;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	-webkit-mask-position: 100% 0;
 	mask-size: 200% 100%;
@@ -5375,8 +5375,8 @@ label {
 
 .info-slide .cityaccent.ii {
 	background-color: #001782;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	-webkit-mask-position: 100% 0;
 	mask-size: 200% 100%;
@@ -5397,8 +5397,8 @@ label {
 
 .info-slide .cityaccent.iii {
 	background-color: #e5be45;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	-webkit-mask-position: 100% 0;
 	mask-size: 200% 100%;
@@ -5422,8 +5422,8 @@ label {
 
 .info-slide .cityaccent.ix {
 	background-color: #e5be45;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	-webkit-mask-position: 100% 0;
 	mask-size: 200% 100%;
@@ -5447,8 +5447,8 @@ label {
 
 .info-slide .cityaccent.iv {
 	background-color: #001782;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	mask-size: 200% 100%;
 	width: 67.5%;
@@ -5467,8 +5467,8 @@ label {
 
 .info-slide .cityaccent.v {
 	background-color: #e5be45;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	mask-size: 200% 100%;
 	width: 72.5%;
@@ -5480,7 +5480,7 @@ label {
 }
 
 .info-slide .cityaccentviishadow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	background-image: url(/weatherscan_plus/images/airport-curve.svg);
 	background-size: 200% 100%;
 	width: 72.5%;
 	height: 227.5%;
@@ -5492,8 +5492,8 @@ label {
 
 .info-slide .cityaccentvii {
 	background-color: #e5be45;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	mask-size: 200% 100%;
 	width: 72.5%;
@@ -5510,8 +5510,8 @@ label {
 }
 
 .info-slide .cityaccent.viii {
-	background-color: #001782 -webkit-mask-image:url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
-	mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	background-color: #001782 -webkit-mask-image:url(/weatherscan_plus/images/airport-curve.svg);
+	mask-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-mask-size: 200% 100%;
 	mask-size: 200% 100%;
 	-webkit-mask-position: 0 100%;
@@ -5525,7 +5525,7 @@ label {
 
 .airport-slide {
 	position: relative;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/airplaneslide.png);
+	background-image: url(/weatherscan_plus/images/airplaneslide.png);
 	background-position: -3% -100%;
 	background-size: 103% 109%
 }
@@ -5538,7 +5538,7 @@ label {
 }
 
 .airport-slide .yellow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/airport-curve.svg);
+	background-image: url(/weatherscan_plus/images/airport-curve.svg);
 	-webkit-filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75));
 	filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75))
 }
@@ -5565,9 +5565,9 @@ label {
 }
 
 .airport-slide .blue.left {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/airplaneslide.png);
+	background-image: url(/weatherscan_plus/images/airplaneslide.png);
 	background-size: 500% 73.2%;
 	background-position: -8.7% 7.2%;
 	width: 22%;
@@ -5579,9 +5579,9 @@ label {
 }
 
 .airport-slide .blue.bottom {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/airplaneslide.png);
+	background-image: url(/weatherscan_plus/images/airplaneslide.png);
 	background-size: 500% 73.2%;
 	background-position: -10.5% 114%;
 	width: 22%;
@@ -5593,7 +5593,7 @@ label {
 }
 
 .airport-slide .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -5605,7 +5605,7 @@ label {
 }
 
 .airport-slide .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -5618,7 +5618,7 @@ label {
 
 .beach-slide {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/beachbbgslide3.jpg) no-repeat bottom;
+	background: transparent url(/weatherscan_plus/images/beachbbgslide3.jpg) no-repeat bottom;
 	background-size: 100% 90%
 }
 
@@ -5630,7 +5630,7 @@ label {
 }
 
 .beach-slide .yellow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/beach-curve.svg);
+	background-image: url(/weatherscan_plus/images/beach-curve.svg);
 	-webkit-filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75));
 	filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75))
 }
@@ -5656,7 +5656,7 @@ label {
 }
 
 .beach-slide .blue.left {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	background-image: url(/weatherscan_plus/images/blue-curve.svg);
 	background-size: 200% 100%;
 	width: 22%;
 	height: 150%;
@@ -5667,7 +5667,7 @@ label {
 }
 
 .beach-slide .blue.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	background-image: url(/weatherscan_plus/images/blue-curve.svg);
 	background-size: 200% 100%;
 	width: 22%;
 	height: 150%;
@@ -5678,7 +5678,7 @@ label {
 }
 
 .beach-slide .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -5690,7 +5690,7 @@ label {
 }
 
 .beach-slide .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -5703,7 +5703,7 @@ label {
 
 .health {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/trees.png) no-repeat;
+	background: transparent url(/weatherscan_plus/images/trees.png) no-repeat;
 	background-size: 125% 95%;
 	background-position: 60% 100%
 }
@@ -5716,7 +5716,7 @@ label {
 }
 
 .health .yellow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/health-curve.svg);
+	background-image: url(/weatherscan_plus/images/health-curve.svg);
 	-webkit-filter: drop-shadow(40x 0 4px rgba(0, 0, 0, .75));
 	filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75))
 }
@@ -5742,9 +5742,9 @@ label {
 }
 
 .health .blue.left {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/trees.png);
+	background-image: url(/weatherscan_plus/images/trees.png);
 	background-size: 570% 63.3%;
 	background-position: 6.8% -2%;
 	width: 22%;
@@ -5756,9 +5756,9 @@ label {
 }
 
 .health .blue.bottom {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/trees.png);
+	background-image: url(/weatherscan_plus/images/trees.png);
 	background-size: 570% 63.3%;
 	background-position: 5.6% 77.6%;
 	width: 22%;
@@ -5770,7 +5770,7 @@ label {
 }
 
 .health .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -5782,7 +5782,7 @@ label {
 }
 
 .health .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -5795,7 +5795,7 @@ label {
 
 .golf {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/golfslide.png) no-repeat;
+	background: transparent url(/weatherscan_plus/images/golfslide.png) no-repeat;
 	background-size: 110% 92%;
 	background-position: 90% 100%
 }
@@ -5808,7 +5808,7 @@ label {
 }
 
 .golf .yellow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/golf-curve.svg);
+	background-image: url(/weatherscan_plus/images/golf-curve.svg);
 	-webkit-filter: drop-shadow(40x 0 4px rgba(0, 0, 0, .75));
 	filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75))
 }
@@ -5823,7 +5823,7 @@ label {
 }
 
 .golf .yellow.right {
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/golfslide.png) no-repeat;
+	background: url(/weatherscan_plus/images/golfslide.png) no-repeat;
 	background-size: 200% 135%;
 	background-position: 100% -30%;
 	top: -15%;
@@ -5831,7 +5831,7 @@ label {
 	width: 51%;
 	height: 85%;
 	z-index: 7;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/golf-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/golf-curve.svg);
 	-webkit-mask-position: 100% 0;
 	-webkit-mask-size: 200% 200%;
 	filter: drop-shadow(-4px 0 4px rgba(0, 0, 0, .75)) saturate(.2)
@@ -5849,9 +5849,9 @@ label {
 }
 
 .golf .blue.left {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/golfslide.png);
+	background-image: url(/weatherscan_plus/images/golfslide.png);
 	background-size: 500% 60.2%;
 	background-position: 1.1% 4%;
 	width: 22%;
@@ -5862,9 +5862,9 @@ label {
 }
 
 .golf .blue.bottom {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/golfslide.png);
+	background-image: url(/weatherscan_plus/images/golfslide.png);
 	background-size: 500% 60.2%;
 	background-position: 0% 79.1%;
 	width: 22%;
@@ -5875,7 +5875,7 @@ label {
 }
 
 .golf .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -5887,7 +5887,7 @@ label {
 }
 
 .golf .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -5900,7 +5900,7 @@ label {
 
 .garden {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/gardenbackground.png) no-repeat;
+	background: transparent url(/weatherscan_plus/images/gardenbackground.png) no-repeat;
 	background-size: 120.7% 101%;
 	background-position: 69.1% 0%
 }
@@ -5913,7 +5913,7 @@ label {
 }
 
 .garden .yellow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/beach-curve.svg);
+	background-image: url(/weatherscan_plus/images/beach-curve.svg);
 	-webkit-filter: drop-shadow(40x 0 4px rgba(0, 0, 0, .75));
 	filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75))
 }
@@ -5928,7 +5928,7 @@ label {
 }
 
 .garden .yellow.right {
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/gardenbackground.png) no-repeat;
+	background: url(/weatherscan_plus/images/gardenbackground.png) no-repeat;
 	background-size: 240% 120%;
 	background-position: 115.5% -87%;
 	top: -15%;
@@ -5936,7 +5936,7 @@ label {
 	width: 51%;
 	height: 85%;
 	z-index: 7;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/beach-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/beach-curve.svg);
 	-webkit-mask-position: 100% 0;
 	-webkit-mask-size: 200% 200%;
 	filter: drop-shadow(-4px 0 4px rgba(0, 0, 0, .75)) saturate(.2) brightness(2)
@@ -5954,9 +5954,9 @@ label {
 }
 
 .garden .blue.left {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/gardenbackground.png);
+	background-image: url(/weatherscan_plus/images/gardenbackground.png);
 	background-size: 550% 65.7%;
 	background-position: 6.5% -10.2%;
 	width: 22%;
@@ -5967,9 +5967,9 @@ label {
 }
 
 .garden .blue.bottom {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/gardenbackground.png);
+	background-image: url(/weatherscan_plus/images/gardenbackground.png);
 	background-size: 546% 67.3%;
 	background-position: 5.1% 76.3%;
 	width: 22%;
@@ -5980,7 +5980,7 @@ label {
 }
 
 .garden .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -5992,7 +5992,7 @@ label {
 }
 
 .garden .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -6005,7 +6005,7 @@ label {
 
 .ski {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/skibackground.png) no-repeat;
+	background: transparent url(/weatherscan_plus/images/skibackground.png) no-repeat;
 	background-size: 120% 114%;
 	background-position: 71.1% -58.6%;
 	filter: brightness(.95)
@@ -6019,7 +6019,7 @@ label {
 }
 
 .ski .yellow {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/ski-curve.svg);
+	background-image: url(/weatherscan_plus/images/ski-curve.svg);
 	-webkit-filter: drop-shadow(40x 0 4px rgba(0, 0, 0, .75));
 	filter: drop-shadow(4px 0 4px rgba(0, 0, 0, .75))
 }
@@ -6034,7 +6034,7 @@ label {
 }
 
 .ski .yellow.right {
-	background: url(https://haydenwalker980.github.io/Weatherscan/images/skibackground.png) no-repeat;
+	background: url(/weatherscan_plus/images/skibackground.png) no-repeat;
 	background-size: 260% 120%;
 	background-position: 110% 87%;
 	top: -15%;
@@ -6042,7 +6042,7 @@ label {
 	width: 51%;
 	height: 85%;
 	z-index: 7;
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/ski-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/ski-curve.svg);
 	-webkit-mask-position: 100% 0;
 	-webkit-mask-size: 200% 200%;
 	filter: drop-shadow(-4px 0 4px rgba(0, 0, 0, .75)) saturate(.2)
@@ -6060,9 +6060,9 @@ label {
 }
 
 .ski .blue.left {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/skibackground.png);
+	background-image: url(/weatherscan_plus/images/skibackground.png);
 	background-size: 525% 74.9%;
 	background-position: 5.67% 8.5%;
 	width: 22%;
@@ -6073,9 +6073,9 @@ label {
 }
 
 .ski .blue.bottom {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/blue-curve.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/blue-curve.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/skibackground.png);
+	background-image: url(/weatherscan_plus/images/skibackground.png);
 	background-size: 525% 74.9%;
 	background-position: 4.4% 124%;
 	width: 22%;
@@ -6086,7 +6086,7 @@ label {
 }
 
 .ski .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -6098,7 +6098,7 @@ label {
 }
 
 .ski .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -6335,7 +6335,7 @@ label {
 	width: 31.35%;
 	top: 600.5px;
 	height: 27.6%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/blueradarcover.png);
+	background-image: url(/weatherscan_plus/images/blueradarcover.png);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	z-index: 10
@@ -6807,9 +6807,9 @@ label {
 }
 
 .bulletin .blue.left {
-	-webkit-mask-image: url(https://haydenwalker980.github.io/Weatherscan/images/red-curve-dark.svg);
+	-webkit-mask-image: url(/weatherscan_plus/images/red-curve-dark.svg);
 	-webkit-mask-size: 200% 100%;
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/warning.png);
+	background-image: url(/weatherscan_plus/images/warning.png);
 	background-size: 470% 60.4%;
 	background-position: -8.8% 7.7%;
 	width: 22%;
@@ -6821,7 +6821,7 @@ label {
 }
 
 .bulletin .blue.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/warning.png);
+	background-image: url(/weatherscan_plus/images/warning.png);
 	background-size: 470% 60.4%;
 	background-position: -10.5% 80%;
 	width: 22%;
@@ -6833,7 +6833,7 @@ label {
 }
 
 .bulletin .white.right {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 100%;
 	width: 22%;
@@ -6845,7 +6845,7 @@ label {
 }
 
 .bulletin .white.bottom {
-	background-image: url(https://haydenwalker980.github.io/Weatherscan/images/white-curve.svg);
+	background-image: url(/weatherscan_plus/images/white-curve.svg);
 	background-size: 200% 100%;
 	background-position: 100% 0;
 	width: 22%;
@@ -6858,7 +6858,7 @@ label {
 
 .bulletin {
 	position: relative;
-	background: transparent url(https://haydenwalker980.github.io/Weatherscan/images/warning.png) no-repeat;
+	background: transparent url(/weatherscan_plus/images/warning.png) no-repeat;
 	background-position: 70% 105%;
 	background-size: 101% 90%
 }
