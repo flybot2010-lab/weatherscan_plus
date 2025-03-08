@@ -25,7 +25,8 @@ var mainMap
 		// loop cities
 		function nextCity(){
 			//severe weather mode
-			if (weatherInfo.bulletin.severeweathermode == true) {
+			//if (weatherInfo.bulletin.severeweathermode == true) {
+			if (false) { //screw janky code
 				$('.city-slide-intro .segment').text(location.city);
 				$('#info-slides-header .hscroller').empty();
 				$('#info-slides-header .hscroller').append("<span class='severe'>SEVERE WEATHER UPDATE</span>");
