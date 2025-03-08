@@ -168,21 +168,21 @@ function WeatherAudio() {
 
 	// plays the vocal current conditions announcement
 	this.playCurrentConditions = function () {
-		startPlaying(['/localvocals/narrations/Your_current_conditions.mp3'], false);
+		startPlaying(['/weatherscan_plus/localvocals/narrations/Your_current_conditions.mp3'], false);
 	}
 	this.playwarningbeep = function () {
-		startPlaying(['/localvocals/narrations/warningbeep.wav'], false);
+		startPlaying(['/weatherscan_plus/localvocals/narrations/warningbeep.wav'], false);
 	}
 
 
 	this.playLocalRadar = function() {
-		startPlaying(['/localvocals/narrations/The_local_Doppler_radar.mp3'], false);
+		startPlaying(['/weatherscan_plus/localvocals/narrations/The_local_Doppler_radar.mp3'], false);
 	}
 	this.playLocalforecasti = function() {
-		startPlaying(['/localvocals/narrations/Your_local_forecast_1.mp3'], false);
+		startPlaying(['/weatherscan_plus/localvocals/narrations/Your_local_forecast_1.mp3'], false);
 	}
 	this.playLocalforecastii = function() {
-		startPlaying(['/localvocals/narrations/Your_local_forecast_2.mp3'], false);
+		startPlaying(['/weatherscan_plus/localvocals/narrations/Your_local_forecast_2.mp3'], false);
 	}
 
 
