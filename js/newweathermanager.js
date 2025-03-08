@@ -53,81 +53,6 @@ function applyApperanceSettings() {
   }
 
 }
-let cachedGolfCourses = null;
-const googlePlacesUrl = `https://places.googleapis.com/v1/places:searchNearby?key=${apiKeyGoogle}`;
-async function getNearbyGolfCourses() {
-  console.log("cached courses: ",cachedGolfCourses);
-  if (cachedGolfCourses) {
-    console.log("Using cached golf courses.");
-    return cachedGolfCourses;
-  }
-  try {
-    // Prepare the request body for POST
-    const requestBody = {
-      maxResultCount: 7,
-      locationRestriction: {
-        circle: {
-          center: {
-            latitude: maincitycoords.lat,
-            longitude: maincitycoords.lon,
-          },
-          radius: 20000,
-        },
-      },
-      includedTypes: ["golf_course"],
-      excludedTypes: ["stadium"],
-    };
-
-    // Make a POST request to the Google Places API
-    const response = await fetch(googlePlacesUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Goog-FieldMask": "places.location,places.displayName,places.types",
-      },
-      body: JSON.stringify(requestBody),
-    });
-
-    var data = await response.json();
-
-    if (data.places && data.places.length > 0) {
-      // Get the 2nd, 3rd, and 4th golf courses
-      const golfCourses = data.places
-        .filter(
-          (item) =>
-            !item.displayName.text.includes("Indoor") &&
-            !item.displayName.text.includes("Topgolf")
-        )
-        .slice(0, 3)
-        .map((course) => ({
-          name: course.displayName.text,
-          lat: course.location.latitude,
-          lon: course.location.longitude,
-        }));
-
-      console.log(golfCourses);
-      cachedGolfCourses = golfCourses;
-      return golfCourses;
-    } else {
-      console.log("No golf courses found.");
-      return [];
-    }
-  } catch (error) {
-    console.error("Error fetching golf courses:", error);
-  }
-}
-
-async function getGolfCourses(callback) {
-  var data;
-  if(autoFindGolfLocations){
-    data = await getNearbyGolfCourses();
-  }else{
-    data = golfLocations;
-  }
-  weatherInfo.golfReport.locations = data;
-  callback();
-}
-
 
 $(function(){
   Intro()
@@ -149,6 +74,7 @@ locList = [], citySlideList = [], state, ccTickerCitiesList = [];
 var trafficcoords1 = {lat:"",lon:""};
 var trafficcoords2 = {lat:"",lon:""};
 
+
   //If there is a location inputted, use that.
 //$.getJSON("http://"+document.location.hostname+":8081/https://services.surfline.com/forecasts/wave?spotId=500927576a2e4300134fbed8", function() {});
 queryString = window.location.search;
@@ -160,19 +86,22 @@ function getMainLoc(configFailed) {
       maincitycoords.lat = data.location.latitude[0]
       maincitycoords.lon = data.location.longitude[0]
       maincitycoords.name = data.location.displayName[0]
+      maincitycoords.state = data.location.adminDistrictCode[0]
       $("#locationname").text("location name: "+data.location.displayName[0])
       maincitycoords.displayname = data.location.displayName[0]
       state = data.location.adminDistrict[0];
-      maincitycoords.state = data.location.adminDistrictCode[0]
+      trafficcoords1.lat = data.location.latitude[0]-0.3885
+      trafficcoords1.lon = data.location.longitude[0]-0.3885
+      trafficcoords2.lat = data.location.latitude[0]+0.3885
+      trafficcoords2.lon = data.location.longitude[0]+0.3885
       //init data
       getStatePopularCities(state, true)
       grabalmanacSlidesData()
       grabHealthData()
-      grabGardenData()
       grabSideandLowerBarData()
-      getGolfCourses(grabGolfData);
       grabTrafficData()
-      generateGolfMap()
+      grabGardenData()
+      setTimeout(() => {grabGolfData()}, 1000);
     });
   } else if (locationSettings.mainLocation.searchQuery.type && configFailed != true) {
     if (locationSettings.mainLocation.searchQuery.type == "geocode") {
@@ -181,6 +110,7 @@ function getMainLoc(configFailed) {
         maincitycoords.lat = data.location.latitude
         maincitycoords.lon = data.location.longitude
         maincitycoords.name = data.location.displayName
+        maincitycoords.state = data.location.adminDistrictCode
         maincitycoords.displayname = ((locationSettings.mainLocation.displayName) ? locationSettings.mainLocation.displayName : data.location.displayName)
         $("#locationname").text("location name: "+maincitycoords.displayname)
         state = data.location.adminDistrict[cidx];
@@ -191,12 +121,10 @@ function getMainLoc(configFailed) {
         getStatePopularCities(state, true)
         grabalmanacSlidesData()
         grabHealthData()
-        grabGardenData()
         grabSideandLowerBarData()
-        getGolfCourses(grabGolfData);
-        generateGolfMap()
         grabTrafficData()
-
+        grabGardenData()
+        setTimeout(() => {grabGolfData()}, 1000);
       });
     } else {
       $.getJSON("https://api.weather.com/v3/location/search?query="+locationSettings.mainLocation.searchQuery.val+"&locationType="+locationSettings.mainLocation.searchQuery.type+"&fuzzyMatch="+locationSettings.mainLocation.searchQuery.fuzzy+((locationSettings.mainLocation.searchQuery.country) ? "&countryCode="+locationSettings.mainLocation.searchQuery.country : "")+((locationSettings.mainLocation.searchQuery.state) ? "&adminDistrictCode="+locationSettings.mainLocation.searchQuery.state : "")+"&language=en-US&format=json&apiKey=" + api_key, function(data) {
@@ -205,21 +133,22 @@ function getMainLoc(configFailed) {
           maincitycoords.lat = data.location.latitude[cidx]
           maincitycoords.lon = data.location.longitude[cidx]
           maincitycoords.name = data.location.displayName[cidx]
-          maincitycoords.displayname = ((locationSettings.mainLocation.displayName) ? locationSettings.mainLocation.displayName : data.location.displayName[cidx])
-          $("#locationname").text("location name: "+maincitycoords.displayname)
-          state = data.location.adminDistrict[cidx];
+          maincitycoords.state = data.location.adminDistrictCode[cidx]
           trafficcoord1.lat = data.location.latitude[cidx]-=0.3885
           trafficcoord1.lon = data.location.longitude[cidx]-=0.3885
           trafficcoord2.lat = data.location.latitude[cidx]+=0.3885
           trafficcoord2.lon = data.location.longitude[cidx]+=0.3885
+          maincitycoords.displayname = ((locationSettings.mainLocation.displayName) ? locationSettings.mainLocation.displayName : data.location.displayName[cidx])
+          $("#locationname").text("location name: "+maincitycoords.displayname)
+          state = data.location.adminDistrict[cidx];
+
           getStatePopularCities(state, true)
           grabalmanacSlidesData()
           grabHealthData()
-          grabGardenData()
           grabSideandLowerBarData()
-          getGolfCourses(grabGolfData);
           grabTrafficData()
-          generateGolfMap()
+          grabGardenData()
+          setTimeout(() => {grabGolfData()}, 1000);
       });
     }
   } else {
@@ -231,140 +160,26 @@ function getMainLoc(configFailed) {
       maincitycoords.displayname = data.city
       maincitycoords.lat = data.lat
       maincitycoords.lon = data.lon
-      state = data.regionName
+      maincitycoords.state = data.region
       trafficcoords1.lat = data.lat -= 0.3885
       trafficcoords1.lon = data.lon -= 0.3885
       trafficcoords2.lat = data.lat += 0.3885
       trafficcoords2.lon = data.lon += 0.3885
+
+      state = data.regionName
       //init data
       getStatePopularCities(state, true)
       grabalmanacSlidesData()
       grabHealthData()
-      grabGardenData()
       grabSideandLowerBarData()
-      getGolfCourses(grabGolfData);
-      generateGolfMap()
+      grabTrafficData()
+      grabGardenData()
+      setTimeout(() => {grabGolfData()}, 1000);
     });
 
   }
 }
 getMainLoc(false);
-
-function generateGolfMap() {
-  var golfImageSource = 'https://phonehome.awnetwork.net/outimages/golf_index_';
-  var estimatedPrecipSource = 'https://phonehome.awnetwork.net/outimages/estimated_precip_';
-  var precipForecastSource = 'https://phonehome.awnetwork.net/outimages/precipitation_forecast_rain_';
-  var droughtSource = 'https://phonehome.awnetwork.net/outimages/drought_index_';
-  console.log("golf mf: ", state);
-  
-  if (
-    state === "Georgia" ||
-    state === "Florida" ||
-    state === "South Carolina" ||
-    state === "Alabama" ||
-    state === "Mississippi" ||
-    state === "Arkansas" ||
-    state === "Louisiana"
-  ) {
-    golfImageSource += 'se.png';
-    estimatedPrecipSource += 'se.png';
-    precipForecastSource += 'se.png';
-    droughtSource += 'se.png';
-  } else if (
-    state === "Maine" ||
-    state === "New Hampshire" ||
-    state === "Vermont" ||
-    state === "Massachusetts" ||
-    state === "Rhode Island" ||
-    state === "Connecticut" ||
-    state === "New York" ||
-    state === "New Jersey" ||
-    state === "Pennsylvania" ||
-    state === "Ohio" ||
-    state === "Maryland" ||
-    state === "Delaware" ||
-    state === "Michigan" ||
-    state === "Indiana"
-  ) {
-    golfImageSource += 'ne.png';
-    estimatedPrecipSource += 'ne.png';
-    precipForecastSource += 'ne.png';
-    droughtSource += 'ne.png';
-  } else if (
-    state === "Kentucky" ||
-    state === "North Carolina" ||
-    state === "Tennessee" ||
-    state === "Virginia" ||
-    state === "West Virginia"
-  ) {
-    golfImageSource += 'ce.png';
-    estimatedPrecipSource += 'ce.png';
-    precipForecastSource += 'ce.png';
-    droughtSource += 'ce.png';
-  } else if (state === "Texas" || state === "Oklahoma") {
-    golfImageSource += 'sc.png';
-    estimatedPrecipSource += 'sc.png';
-    precipForecastSource += 'sc.png';
-    droughtSource += 'sc.png';
-  } else if (
-    state === "Minnesota" ||
-    state === "Iowa" ||
-    state === "North Dakota" ||
-    state === "South Dakota" ||
-    state === "Nebraska" ||
-    state === "Illinois" ||
-    state === "Wisconsin"
-  ) {
-    golfImageSource += 'nc.png';
-    estimatedPrecipSource += 'nc.png';
-    precipForecastSource += 'nc.png';
-    droughtSource += 'nc.png';
-  } else if (state === "Missouri" || state === "Kansas") {
-    golfImageSource += 'cc.png';
-    estimatedPrecipSource += 'cc.png';
-    precipForecastSource += 'cc.png';
-    droughtSource += 'cc.png';
-  } else if (
-    state === "Oregon" ||
-    state === "Washington" ||
-    state === "Idaho" ||
-    state === "Montana"
-  ) {
-    golfImageSource += 'nw.png';
-    estimatedPrecipSource += 'nw.png';
-    precipForecastSource += 'nw.png';
-    droughtSource += 'nw.png';
-  } else if (
-    state === "Arizona" ||
-    state === "California" ||
-    state === "New Mexico" ||
-    state === "Colorado" ||
-    state === "Nevada"
-  ) {
-    golfImageSource += 'sw.png';
-    estimatedPrecipSource += 'sw.png';
-    precipForecastSource += 'sw.png';
-    droughtSource += 'sw.png';
-  } else if (state === "Utah" || state === "Wyoming") {
-    golfImageSource += 'cw.png';
-    estimatedPrecipSource += 'cw.png';
-    precipForecastSource += 'cw.png';
-    droughtSource += 'cw.png';
-  } else {
-    golfImageSource = 'images/na_map_zoomout.png';
-    estimatedPrecipSource = 'images/na_map_zoomout.png';
-    precipForecastSource = 'images/na_map_zoomout.png';
-    droughtSource = 'images/na_map_zoomout.png';
-    $('.info-slide.golf .tempunavailable').fadeIn(500);
-    $('.info-slide.golf .golf-map img').css({ width: '100%', height: '100%', 'margin-top': '0px' });
-  }
-
-  console.log("golf mf: ", golfImageSource);
-  $('.info-slide.golf .golf-map').attr('src', golfImageSource);
-  $('.info-slide.garden .estimatedprecip-map').attr('src', estimatedPrecipSource);
-  $('.info-slide.garden .precip-forecast-map').attr('src', precipForecastSource);
-  $('.info-slide.garden .drought-map').attr('src', droughtSource);
-}
 
 function getExtraLocs(lat,lon, onInit, whichReset) {
     $.getJSON('https://api.weather.com/v3/location/near?geocode=' + lat + ',' + lon + '&product=observation&format=json&apiKey=' + api_key, function(data) {
@@ -500,7 +315,7 @@ function getExtraLocs(lat,lon, onInit, whichReset) {
   }
 
   function getStatePopularCities(state, onInit) {
-    $.getJSON("https://phonehome.awnetwork.net/api/weather_data/state" + state, function(data) {
+    $.getJSON("https://v2.weatherscan.net/cityapi/" + state, function(data) {
       if (data !== undefined && data.records.length != 0) {
       data.records.forEach((city, i) => {
         if (onInit==true) {
@@ -553,8 +368,6 @@ var weatherInfo = { currentCond: {
       {name:"",cond:"",icon:"",high:"",low:"",windspeed:""}
     ]},*/
     weatherLocs:[]
-  }, golfReport: {
-    locations: [],
   },gardenReport: {
     watering_need_index: 0,
     watering_need_category: "",
@@ -599,7 +412,7 @@ var weatherInfo = { currentCond: {
     {displayname:"New York / LaGuardia",iata:"LGA",delay:"No Delay",temp:"",icon:"",windspeed:""},
     {displayname:"Chicago O'hare Int'l",iata:"ORD",delay:"No Delay",temp:"",icon:"",windspeed:""},
     {displayname:"Los Angeles Int'l",iata:"LAX",delay:"No Delay",temp:"",icon:"",windspeed:""},
-    {displayname:"Atlanta International",iata:"ATL",delay:"No Delay",temp:"",icon:"",windspeed:""},
+    {displayname:"Atlanta International",iata:"LAX",delay:"No Delay",temp:"",icon:"",windspeed:""},
     {displayname:"Dallas / Ft. Worth Int'l",iata:"DFW",delay:"No Delay",temp:"",icon:"",windspeed:""},
     {displayname:"Denver International",iata:"DEN",delay:"No Delay",temp:"",icon:"",windspeed:""},
     {displayname:"Boston / Logan Int'l",iata:"BOS",delay:"No Delay",temp:"",icon:"",windspeed:""},
@@ -613,6 +426,58 @@ var weatherInfo = { currentCond: {
     {displayname:"Seattle - Tacoma Int'l",iata:"SEA",delay:"No Delay",temp:"",icon:"",windspeed:""},
     {displayname:"Lambert - St. Louis Int'l",iata:"STL",delay:"No Delay",temp:"",icon:"",windspeed:""},
   ]},
+  regionalTravel:{noReport:false,cities:[
+    {displayname:"Portland",lat:"43.6591",lon:"-70.2568",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Buffalo",lat:"42.8864",lon:"-78.8784",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Pittsburgh",lat:"40.4406",lon:"-79.9959",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Burlington",lat:"44.4759",lon:"-73.2121",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"New York City",lat:"40.7306",lon:"-73.9352",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Boston",lat:"42.3611",lon:"-71.0570",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Philadelphia",lat:"39.9526",lon:"-75.1652",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Pittsburgh",lat:"40.4406",lon:"-79.9959",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Charleston",lat:"38.3498",lon:"-81.6326",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Washington, DC",lat:"38.8951",lon:"-77.0364",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Charlotte",lat:"35.2271",lon:"-80.8431",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Nashville",lat:"36.1627",lon:"-86.7816",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Atlanta",lat:"33.7537",lon:"-84.3863",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Montgomery",lat:"32.3792",lon:"-86.3077",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Jackson",lat:"32.2981",lon:"-90.1806",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Miami",lat:"25.7617",lon:"-80.1918",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Tampa",lat:"27.9517",lon:"-82.4588",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Jacksonville",lat:"30.3322",lon:"-81.6557",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Pensacola",lat:"30.4213",lon:"-87.2169",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"New Orleans",lat:"29.9509",lon:"-90.0758",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"St. Louis",lat:"38.6270",lon:"-90.1994",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Topeka",lat:"39.0473",lon:"-95.6752",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Dodge City",lat:"37.7528",lon:"-100.0171",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Oklahoma City",lat:"35.4676",lon:"-97.5164",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Amarillo",lat:"35.2220",lon:"-101.8313",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Oklahoma City",lat:"35.4676",lon:"-97.5164",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Dallas",lat:"32.7791",lon:"-96.8088",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"El Paso",lat:"31.7619",lon:"-106.4850",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Albuquerque",lat:"35.0844",lon:"-106.6504",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Phoenix",lat:"33.4484",lon:"-112.0740",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Cheyenne",lat:"41.1400",lon:"-104.8202",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Denver",lat:"39.7392",lon:"-104.9903",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Colorado Springs",lat:"38.8339",lon:"-104.8214",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Salt Lake City",lat:"40.7608",lon:"-111.8910",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Las Vegas",lat:"36.1716",lon:"-115.1391",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Seattle",lat:"47.6061",lon:"-122.3328",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Spokane",lat:"47.6580",lon:"-117.4235",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Boise",lat:"43.6150",lon:"-116.2023",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Portland",lat:"45.5152",lon:"-122.6784",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Billings",lat:"45.7833",lon:"-108.5007",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"San Francisco",lat:"37.7739",lon:"-122.4312",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"St. George",lat:"37.0965",lon:"-113.5684",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Phoenix",lat:"33.4484",lon:"-112.0740",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Los Angeles",lat:"34.0522",lon:"-118.2436",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Las Vegas",lat:"36.1716",lon:"-115.1391",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Fargo",lat:"46.8772",lon:"-96.7898",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Minneapolis",lat:"44.9778",lon:"-93.2650",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Sioux Falls",lat:"43.5460",lon:"-96.7313",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Rapid City",lat:"44.0805",lon:"-103.2310",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+    {displayname:"Madison",lat:"43.0722",lon:"-89.4008",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
+   ]},
   travel:{noReport:false,cities:[
    {displayname:"New York City",lat:"40.7306",lon:"-73.9352",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
    {displayname:"Chicago",lat:"41.8818",lon:"-87.6231",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
@@ -635,6 +500,10 @@ var weatherInfo = { currentCond: {
   {displayname:"Rio de Janeiro",lat:"-22.9083",lon:"-43.1963",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]},
   {displayname:"Hong Kong",lat:"22.3027",lon:"114.1772",days:[{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""},{dayName:"",icon:"",high:"",low:"",windspeed:""}]}
 ]},
+golf:{
+  teeTime:{},
+  courses:[],
+},
   ccticker: {noReportCC:false,noReportFC:false,noReportAC:false,arrow:"",ccLocs:[],ccairportdelays:[]},
   radarTempUnavialable: false,
   radarWinterLegend: false,
@@ -687,6 +556,29 @@ function grabTravelData() {
   });
 }
 grabTravelData()
+function grabRegionalTravelData() {
+  var url = "https://api.weather.com/v3/aggcommon/v3-wx-forecast-daily-5day?geocodes="
+  weatherInfo.regionalTravel.cities.forEach((loc, i) => {
+    url += `${loc.lat},${loc.lon};`
+  });
+  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  $.getJSON(url, function(data) {
+    data.forEach((ajaxedLoc, i) => {
+      var daycorrection = 0;
+      if (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) {
+        daycorrection = 1;
+      }
+      for (var hi = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 1 : 0, hidp = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 2 : 0; hi < 3 + daycorrection; hi++, hidp = hidp + 2) {
+        weatherInfo.regionalTravel.cities[i].days[hi - daycorrection].dayName = ajaxedLoc["v3-wx-forecast-daily-5day"].dayOfWeek[hi]
+        weatherInfo.regionalTravel.cities[i].days[hi - daycorrection].icon = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].iconCode[hidp]
+        weatherInfo.regionalTravel.cities[i].days[hi - daycorrection].high = ajaxedLoc["v3-wx-forecast-daily-5day"].temperatureMax[hi]
+        weatherInfo.regionalTravel.cities[i].days[hi - daycorrection].low = ajaxedLoc["v3-wx-forecast-daily-5day"].temperatureMin[hi]
+        weatherInfo.regionalTravel.cities[i].days[hi - daycorrection].windspeed = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windSpeed[hidp]
+      }
+    })
+  });
+}
+grabRegionalTravelData()
 function grabInternationalData() {
   var url = "https://api.weather.com/v3/aggcommon/v3-wx-forecast-daily-5day?geocodes="
   weatherInfo.international.cities.forEach((loc, i) => {
@@ -955,7 +847,204 @@ function grabCitySlidesData() {
     }
   })
 }
+function grabGardenData() {
+  $.getJSON(
+    "https://api.weather.com/v2/indices/wateringNeeds/daypart/3day?geocode=" +
+      maincitycoords.lat +
+      "," +
+      maincitycoords.lon +
+      "&format=json&language=en-US&apiKey=" +
+      api_key,
+    function (data) {
+      weatherInfo.gardenReport.watering_need_index =
+        data.wateringNeedsIndex12hour.wateringNeedsIndex[0];
+      weatherInfo.gardenReport.watering_need_category =
+        data.wateringNeedsIndex12hour.wateringNeedsCategory[0];
+    }
+  );
+}
+grabGardenData()
+function grabGolfData() {
+  function buildHourlyTimeTitle(time){
+    var hour=dateFns.getHours(time);
+    if (hour===0) {
+      return 'Midnight';
+    } else if (hour===12){
+      return 'Noon';
+    }
+    return (dateFns.format(time,'h a')).replace(" ", "");
+  }
+  function calcHourlyReport(data) {
+    var ret = [],
+      targets = [6, 8, 10, 12, 14, 16, 18, 20],   // hours that we report
+      current = dateFns.getHours(new Date()),
+      now = new Date(),
+      //firsthour = targets[ getNextHighestIndex(targets, current) ],
+      start,
+      hour, hi=0;
 
+      switch (true) {
+        case (current < 6):
+          start = 6; //before 3:00
+        case (current < 8):
+          start = 8; break; //before 9:00 after 3:00
+        case (current < 10):
+          start = 10; break; //before 12:00 after 9:00
+        case (current < 12):
+          start = 12; break; //before 2:00 after 12:00
+        case (current < 14):
+          start = 14; break; //before 5:00 after 2:00
+        case (current < 16):
+            start = 16; break; //before 8:00 after 5:00
+        case (current < 18):
+            start = 18; break;
+        case (current < 20):
+            start = 20; break;
+        default:
+          start = 6;
+      }
+    while(ret.length<5){
+      // hour must be equal or greater than current
+      hour = dateFns.getHours(data.validTimeLocal[hi] );
+      if ( dateFns.isAfter(data.validTimeLocal[hi], now) && (hour==start || ret.length>0) )  {
+        if ( targets.indexOf(hour)>=0 ) { // it is in our target list so record its index
+          ret.push(hi);
+        }
+      }
+      hi++;
+    }
+    return ret;
+  }
+  function golfDayName(dayData) {
+    var gtoday = new Date();
+    var gdayOfWeek = gtoday.getDay();
+    var gdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    if (dayData == "Tomorrow") {
+      return gdays[gdayOfWeek+1];
+    } else {
+      return dayData
+    }
+  }
+  var url = "https://api.weather.com/v3/aggcommon/v3-wx-forecast-hourly-1day?geocodes="
+  url += `${maincitycoords.lat},${maincitycoords.lon};`
+  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  $.getJSON(url, function(data) {
+    var ajaxedLoc = data[0]
+    var indexes = calcHourlyReport(ajaxedLoc["v3-wx-forecast-hourly-1day"]);
+    var weatherLocsGo = {noReport:false,displayname:"",hour:[{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""},{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""},{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""},{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""},{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""}]}
+    for (var hi = 0; hi < 5; hi++) {
+      weatherLocsGo.hour[hi].time = buildHourlyTimeTitle(ajaxedLoc["v3-wx-forecast-hourly-1day"].validTimeLocal[indexes[hi]])
+      weatherLocsGo.hour[hi].day = ajaxedLoc["v3-wx-forecast-hourly-1day"].dayOfWeek[indexes[hi]].substring(0,3)
+      weatherLocsGo.hour[hi].temp = ajaxedLoc["v3-wx-forecast-hourly-1day"].temperature[indexes[hi]]
+      weatherLocsGo.hour[hi].icon = ajaxedLoc["v3-wx-forecast-hourly-1day"].iconCode[indexes[hi]]
+      weatherLocsGo.hour[hi].wind = ajaxedLoc["v3-wx-forecast-hourly-1day"].windDirectionCardinal[indexes[hi]] + ' ' + ajaxedLoc["v3-wx-forecast-hourly-1day"].windSpeed[indexes[hi]]
+      weatherLocsGo.hour[hi].windspeed = ajaxedLoc["v3-wx-forecast-hourly-1day"].windSpeed[indexes[hi]]
+    }
+    weatherLocsGo.displayname = maincitycoords.name
+    weatherInfo.golf.teeTime = weatherLocsGo
+  }).fail(function() {
+    weatherInfo.golf.teeTime =  {noReport:true,displayname:"",hour:[{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""},{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""},{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""},{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""},{day:"",time:"",temp:"",icon:"",wind:"",windspeed:""}]}
+  })
+  var courseDataone = {noReport:false,displayname:"",day:[{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""}]}
+  var url = "https://api.weather.com/v3/aggcommon/v3-wx-forecast-daily-5day?geocode="
+  url += `${maincitycoords.lat},${maincitycoords.lon}`
+  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  $.getJSON(url, function(data) {
+    ajaxedLoc = data
+    daycorrection = 0
+    for (var hi = 0, hidp = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 2 : 0, hit = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 1 : 0; hi < 3 + daycorrection; hi++, hit++, hidp = hidp + 2) {
+      courseDataone.day[hi].icon = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].iconCode[hidp]
+      courseDataone.day[hi].high = ajaxedLoc["v3-wx-forecast-daily-5day"].temperatureMax[hit]
+      courseDataone.day[hi].windspeed = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windSpeed[hidp]
+      courseDataone.day[hi].wind = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windDirectionCardinal[hidp] + " " + ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windSpeed[hidp]
+      courseDataone.day[hi].low = ajaxedLoc["v3-wx-forecast-daily-5day"].temperatureMin[hit]
+    }
+  })
+  var url = "https://api.weather.com/v2/indices/golf/daypart/5day?geocode="
+  url += `${maincitycoords.lat},${maincitycoords.lon}`
+  url += "&language=en-US&format=json&apiKey=" + api_key
+  $.getJSON(url, function(data) {
+    var golfData = data.golfIndex12hour
+    var crctn = ((golfData.golfIndex[0] == null) ? 1 : 0)
+    for (var hi = 0; hi < 3; hi++) {
+      courseDataone.displayname = maincitycoords.name + " Golf Courses"
+      courseDataone.day[hi].golfIndex = golfData.golfIndex[crctn]
+      courseDataone.day[hi].golfIndexWord = golfData.golfCategory[crctn]
+      courseDataone.day[hi].day = golfDayName(golfData.daypartName[crctn])
+      crctn = crctn + 2
+    }
+    weatherInfo.golf.courses[0] = courseDataone
+  }).fail(function() {
+    weatherInfo.golf.courses[0] = {noReport:true,displayname:"",day:[{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""}]}
+  })
+  var courseDatatwo = {noReport:false,displayname:"",day:[{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""}]}
+  var url = "https://api.weather.com/v3/aggcommon/v3-wx-forecast-daily-5day?geocode="
+  url += `${locList[0].lat},${locList[0].lon}`
+  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  $.getJSON(url, function(data) {
+    ajaxedLoc = data
+    daycorrection = 0
+    for (var hi = 0, hidp = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 2 : 0, hit = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 1 : 0; hi < 3 + daycorrection; hi++, hit++, hidp = hidp + 2) {
+      courseDatatwo.day[hi].icon = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].iconCode[hidp]
+      courseDatatwo.day[hi].high = ajaxedLoc["v3-wx-forecast-daily-5day"].temperatureMax[hit]
+      courseDatatwo.day[hi].windspeed = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windSpeed[hidp]
+      courseDatatwo.day[hi].wind = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windDirectionCardinal[hidp] + " " + ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windSpeed[hidp]
+      courseDatatwo.day[hi].low = ajaxedLoc["v3-wx-forecast-daily-5day"].temperatureMin[hit]
+    }
+  })
+  var url = "https://api.weather.com/v2/indices/golf/daypart/5day?geocode="
+  url += `${locList[0].lat},${locList[0].lon}`
+  url += "&language=en-US&format=json&apiKey=" + api_key
+  $.getJSON(url, function(data) {
+    var golfData = data.golfIndex12hour
+    var crctn = ((golfData.golfIndex[0] == null) ? 1 : 0)
+    for (var hi = 0; hi < 3; hi++) {
+      courseDatatwo.displayname = locList[0].displayname + " Golf Courses"
+      courseDatatwo.day[hi].golfIndex = golfData.golfIndex[crctn]
+      courseDatatwo.day[hi].golfIndexWord = golfData.golfCategory[crctn]
+      courseDatatwo.day[hi].day = golfDayName(golfData.daypartName[crctn])
+      crctn = crctn + 2
+    }
+    weatherInfo.golf.courses[1] = courseDatatwo
+  }).fail(function() {
+    weatherInfo.golf.courses[1]  = {noReport:true,displayname:"",day:[{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""}]}
+  })
+  var courseDatathree = {noReport:false,displayname:"",day:[{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""}]}
+  var url = "https://api.weather.com/v3/aggcommon/v3-wx-forecast-daily-5day?geocode="
+  url += `${locList[1].lat},${locList[1].lon}`
+  url += "&language=en-US&units=e&format=json&apiKey=" + api_key
+  $.getJSON(url, function(data) {
+    ajaxedLoc = data
+    daycorrection = 0
+    for (var hi = 0, hidp = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 2 : 0, hit = (ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].daypartName[0] == null) ? 1 : 0; hi < 3 + daycorrection; hi++, hit++, hidp = hidp + 2) {
+      courseDatathree.day[hi].icon = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].iconCode[hidp]
+      courseDatathree.day[hi].high = ajaxedLoc["v3-wx-forecast-daily-5day"].temperatureMax[hit]
+      courseDatathree.day[hi].windspeed = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windSpeed[hidp]
+      courseDatathree.day[hi].wind = ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windDirectionCardinal[hidp] + " " + ajaxedLoc["v3-wx-forecast-daily-5day"].daypart[0].windSpeed[hidp]
+      courseDatathree.day[hi].low = ajaxedLoc["v3-wx-forecast-daily-5day"].temperatureMin[hit]
+    }
+  })
+  var url = "https://api.weather.com/v2/indices/golf/daypart/5day?geocode="
+  url += `${locList[1].lat},${locList[1].lon}`
+  url += "&language=en-US&format=json&apiKey=" + api_key
+  $.getJSON(url, function(data) {
+    var golfData = data.golfIndex12hour
+    var crctn = ((golfData.golfIndex[0] == null) ? 1 : 0)
+    for (var hi = 0; hi < 3; hi++) {
+      courseDatathree.displayname = locList[1].displayname + " Golf Courses"
+      courseDatathree.day[hi].golfIndex = golfData.golfIndex[crctn]
+      courseDatathree.day[hi].golfIndexWord = golfData.golfCategory[crctn]
+      courseDatathree.day[hi].day = golfDayName(golfData.daypartName[crctn])
+      crctn = crctn + 2
+    }
+    weatherInfo.golf.courses[2] = courseDatathree
+  }).fail(function() {
+    weatherInfo.golf.courses[2]  = {noReport:false,displayname:"",day:[{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""},{day:"",high:"",low:"",icon:"",wind:"",windspeed:"",golfIndex:"",golfIndexWord:""}]}
+  })
+}
+setTimeout(() => {
+  grabGolfData()
+}, 3000);
 function grabSideandLowerBarData() {
   weatherInfo.bulletin.marqueewarnings = [];
   weatherInfo.bulletin.severewarnings = [];
@@ -1209,9 +1298,7 @@ function grabalmanacSlidesData() {
     });
     var phasesfound = 0;
     $.getJSON(`https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format(new Date(),"M")}&year=${dateFns.format(new Date(),"YYYY")}`, function(data) {
-      console.log('test')
       for (phase in data.phase) {
-        console.log(phasesfound)
         if (data.phase[phase].isPhaseLimit && phasesfound < 4 && phase > parseInt(dateFns.format(new Date(),"D"))) {
           weatherInfo.almanac.moonphases[phasesfound].name = {"new moon": "NEW", "first quarter": "FIRST", "full moon": "FULL", "last quarter": "LAST"}[(data.phase[phase].phaseName).toLowerCase()]
           weatherInfo.almanac.moonphases[phasesfound].date = String(data.monthName).slice(0,3) + " " + phase
@@ -1226,7 +1313,6 @@ function grabalmanacSlidesData() {
       $.getJSON(`https://www.icalendar37.net/lunar/api/?lang=en&month=${dateFns.format((dateFns.addMonths(new Date(),1)),"M")}&year=${dateFns.format(dateFns.addMonths(new Date(),1),"YYYY")}`, function(data) {
         for (phase in data.phase) {
           if (data.phase[phase].isPhaseLimit && phasesfound < 4) {
-            console.log(phasesfound)
             weatherInfo.almanac.moonphases[phasesfound].name = {"new moon": "NEW", "first quarter": "FIRST", "full moon": "FULL", "last quarter": "LAST"}[(data.phase[phase].phaseName).toLowerCase()]
             weatherInfo.almanac.moonphases[phasesfound].date = String(data.monthName).slice(0,3) + " " + phase
             phasesfound += 1;
@@ -1234,266 +1320,14 @@ function grabalmanacSlidesData() {
         }
       })
     }
-}
-
-// Originally this branch auto-found the timezome, which you can see parts of here
-const getTimeInTimezone = (timeZone) => {
-  // Get the current date and time in the specified timezone
-  //const dateInTimezone = new Date().toLocaleString("en-US", { timeZone });
-
-  // Create a new Date object from the localized string
-  //return new Date(dateInTimezone);
-  return new Date();
-};
-
-function processTimeLabels(timeLabels, master_timezone) {
-  const removedIndexes = [];
-
-  // Step 1: Filter out "night" entries and track their indexes
-  const filteredLabels = timeLabels.filter((label, index) => {
-    if (label == null) {
-      removedIndexes.push(index);
-      return false;
-    } // Sometimes past times will be turned into null for some reason
-    if (label.toLowerCase().includes("night")) {
-      removedIndexes.push(index); // Keep track of removed index
-      return false; // Exclude this item from filteredLabels
+    cdatec = new Date();
+    cmonthc = cdatec.getMonth()+1
+    if (cmonthc < 4 || cmonthc > 10) {
+      weatherInfo.radarWinterLegend = true
+    } else {
+      weatherInfo.radarWinterLegend = false
     }
-    return true; // Keep this item
-  });
-
-  // Step 2: Determine the current day in the provided timezone
-  const now = getTimeInTimezone();
-  const options = { weekday: "long" };
-  const dayFormatter = new Intl.DateTimeFormat("en-US", options);
-
-  function getFormattedDay(date) {
-    // Create a new Date object for the specified date
-    const dateInNY = new Date(
-      date.toLocaleString("en-US")
-    );
-    const dayFormatter = new Intl.DateTimeFormat("en-US", options);
-    return dayFormatter.format(dateInNY);
-  }
-
-  // Step 3: Define a function to add days to a date
-  const addDays = (date, days) => {
-    let result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  };
-
-  // Step 4: Map labels to their respective weekday names
-  var arbitrary_offset = 0;
-  const dayNames = filteredLabels.map((label, index) => {
-    //console.log("GOLF PARSED DATA", label, index)
-    let dayOffset;
-
-    // Define the offset based on the label
-    switch (label.toLowerCase()) {
-      case "today":
-        dayOffset = 0;
-        break;
-      case "tomorrow":
-        dayOffset = 1;
-        arbitrary_offset = 1;
-        break;
-      case "tonight":
-        dayOffset = 0;
-        break;
-      default:
-        dayOffset = index + arbitrary_offset; // ???? Why is +1 needed here?? It creates duplicates in this context: Input: "Tomorrow Sunday Monday" -> "Saturday Saturday Sunday"; (But works fine when its today?)
-        // Will look into deeper later, for now it is fixed via "arbitrary_offset" lol, might have smth to do with starting off at tomorrow, is +1, which means everything after is also +1 but idk
-        break;
-    }
-
-    // Calculate the actual day name based on the offset
-    function getFutureDayName(timeOffsetDays, master_timezone) {
-      // Get the current date and time in New York time zone
-      const currentDate = new Date();
-      const options = {  };
-
-      // Get New York date and time offset
-      const newYorkDate = new Date(new Date().toLocaleString("en-US", options));
-
-      // Add timeOffsetDays to New York date
-      newYorkDate.setDate(newYorkDate.getDate() + timeOffsetDays);
-
-      // Get the day name of the new date
-      const dayName = newYorkDate.toLocaleDateString("en-US", {
-        weekday: "long",
-      });
-
-      return dayName;
-    }
-    const targetDate = getFutureDayName(dayOffset, "");
-    //console.log("GOLF day", dayFormatter.format(now), dayFormatter.format(targetDate), label, dayOffset);
-    return targetDate;
-  });
-
-  // Return both the processed day names and the indexes of removed items
-  return { dayNames, removedIndexes };
 }
-
-function grabGardenData() {
-  $.getJSON(
-    "https://api.weather.com/v2/indices/wateringNeeds/daypart/3day?geocode=" +
-      maincitycoords.lat +
-      "," +
-      maincitycoords.lon +
-      "&format=json&language=en-US&apiKey=" +
-      api_key,
-    function (data) {
-      console.log("GARDEN DATA", data);
-      weatherInfo.gardenReport.watering_need_index =
-        data.wateringNeedsIndex12hour.wateringNeedsIndex[0];
-      weatherInfo.gardenReport.watering_need_category =
-        data.wateringNeedsIndex12hour.wateringNeedsCategory[0];
-    }
-  );
-}
-function grabGolfData() {
-  weatherInfo.golfReport.locations.forEach((location) => {
-    location.weather = {
-      golfIndex: {},
-      forecastData: {
-        threeDay: {},
-        hourlyReport: {},
-      },
-    };
-
-    $.getJSON(
-      `https://api.weather.com/v2/indices/golf/daypart/15day?geocode=${location.lat},${location.lon}&language=en-US&format=json&apiKey=${api_key}`,
-      function (data) {
-        data = data.golfIndex12hour;
-        const processed_time_labels = processTimeLabels(
-          data.daypartName,
-          ""
-        );
-        location.weather.golfIndex.timeLabels = processed_time_labels.dayNames;
-
-        const golf_categories = data.golfCategory.filter(
-          (_, index) => !processed_time_labels.removedIndexes.includes(index)
-        );
-        const golf_index = data.golfIndex.filter(
-          (_, index) => !processed_time_labels.removedIndexes.includes(index)
-        );
-
-        location.weather.golfIndex.golfCategories = golf_categories;
-        location.weather.golfIndex.golfIndex = golf_index;
-      }
-    );
-
-    $.getJSON(
-      `https://api.weather.com/v3/wx/forecast/daily/3day?geocode=${location.lat},${location.lon}&format=json&units=e&language=en-US&apiKey=${api_key}`,
-      function (data) {
-        dataTemp = data;
-        data = data.daypart[0];
-        const processed_time_labels = processTimeLabels(data.daypartName, "");
-    
-        location.weather.forecastData.threeDay.timeLabels =
-          processed_time_labels.dayNames;
-    
-        location.weather.forecastData.threeDay.icon = data.iconCode
-          .filter((_, index) => !processed_time_labels.removedIndexes.includes(index))
-          .filter((item) => item !== null);
-    
-        location.weather.forecastData.threeDay.windDirectionCardinal =
-          data.windDirectionCardinal
-            .filter((_, index) => !processed_time_labels.removedIndexes.includes(index))
-            .filter((item) => item !== null);
-    
-        location.weather.forecastData.threeDay.windSpeed = data.windSpeed
-          .filter((_, index) => !processed_time_labels.removedIndexes.includes(index))
-          .filter((item) => item !== null);
-    
-        location.weather.forecastData.threeDay.tempMax =
-          dataTemp.calendarDayTemperatureMax.filter((item) => item !== null);
-    
-        location.weather.forecastData.threeDay.tempMin =
-          dataTemp.calendarDayTemperatureMin.filter((item) => item !== null);
-    
-        while (location.weather.forecastData.threeDay.tempMax.length < 3) {
-          location.weather.forecastData.threeDay.tempMax.push("N/A");
-        }
-        while (location.weather.forecastData.threeDay.tempMin.length < 3) {
-          location.weather.forecastData.threeDay.tempMin.push("N/A");
-        }
-    
-        console.log("Final Temp Max:", location.weather.forecastData.threeDay.tempMax);
-        console.log("Final Temp Min:", location.weather.forecastData.threeDay.tempMin);
-      }
-    );
-
-    $.getJSON(
-      `https://api.weather.com/v3/wx/forecast/hourly/2day?geocode=${location.lat},${location.lon}&format=json&units=e&language=en-US&apiKey=${api_key}`,
-      function (data) {
-        function buildHourlyTimeTitle(time) {
-          var hour = dateFns.getHours(time);
-          if (hour === 0) {
-            return "Midnight";
-          } else if (hour === 12) {
-            return "Noon";
-          }
-          return dateFns.format(time, "h a").replace(" ", "");
-        }
-
-        const removedIndexes = [];
-        location.weather.forecastData.hourlyReport.dayLabels = [];
-
-        location.weather.forecastData.hourlyReport.hourLabels =
-          data.validTimeLocal
-            .map((time, index) => {
-              const dayName = new Date(time).toLocaleString("en-US", {
-                weekday: "short",
-              });
-              const hour = dateFns.getHours(time);
-
-              // Check if the hour is divisible by 2
-              if (hour % 2 === 0) {
-                location.weather.forecastData.hourlyReport.dayLabels.push(
-                  dayName
-                );
-                return buildHourlyTimeTitle(time);
-              } else {
-                // If not divisible by 2, add index to removed_indexes
-                removedIndexes.push(index);
-                return null;
-              }
-            })
-            .filter(Boolean)
-            .splice(0, 5);
-
-        /*location.weather.forecastData.hourlyReport.dayLabels =
-          data.dayOfWeek.filter(
-            (_, index) => !removedIndexes.includes(index)
-          ).splice(0, 5);*/ // Isnt accurate for some reason
-
-        location.weather.forecastData.hourlyReport.dayLabels =
-          location.weather.forecastData.hourlyReport.dayLabels.splice(0, 5);
-
-        location.weather.forecastData.hourlyReport.temperature =
-          data.temperature
-            .filter((_, index) => !removedIndexes.includes(index))
-            .splice(0, 5);
-
-        location.weather.forecastData.hourlyReport.windSpeed = data.windSpeed
-          .filter((_, index) => !removedIndexes.includes(index))
-          .splice(0, 5);
-
-        location.weather.forecastData.hourlyReport.windDirectionCardinal =
-          data.windDirectionCardinal
-            .filter((_, index) => !removedIndexes.includes(index))
-            .splice(0, 5);
-
-        location.weather.forecastData.hourlyReport.icon = data.iconCode
-          .filter((_, index) => !removedIndexes.includes(index))
-          .splice(0, 5);
-      }
-    );
-  });
-}
-
 function grabHealthData() {
   $.getJSON('https://api.weather.com/v3/wx/forecast/daily/5day?geocode='+ maincitycoords.lat + ',' + maincitycoords.lon +"&format=json&language=en-US&units=e&apiKey=" + api_key, function(data) {
     var healthforecastdata = data
@@ -1511,7 +1345,6 @@ function grabHealthData() {
     weatherInfo.healthforecast.low = healthforecastdata.temperatureMin[starthidxdayonly]
     weatherInfo.healthforecast.precipChance = healthforecastdata.daypart[0].precipChance[starthidx] + '%'
     weatherInfo.healthforecast.humid = healthforecastdata.daypart[0].relativeHumidity[starthidx] + '%'
-    weatherInfo.gardenReport.cloudCover = healthforecastdata.daypart[0].cloudCover[starthidx] + "%";
     weatherInfo.healthforecast.wind = (((healthforecastdata.daypart[0].windDirectionCardinal[starthidx] == "CALM") ? 'calm' :  healthforecastdata.daypart[0].windDirectionCardinal[starthidx]) + ' ' + ((healthforecastdata.daypart[0].windSpeed[starthidx] === 0) ? '' : healthforecastdata.daypart[0].windSpeed[starthidx]))
     weatherInfo.healthforecast.windspeed = healthforecastdata.daypart[0].windSpeed[starthidx]
   });
@@ -1621,7 +1454,7 @@ function grabHealthData() {
   })
 }
 function grabAirportDelayData() {
-  $.getJSON('https://phonehome.awnetwork.net/airport', function(eventdata) {
+    $.getJSON('https://partners.weatherscan.net/apicalls/airportdelays', function(eventdata) {
       for (const airportevent of eventdata) {
         var airportdelay = {iata:"",type:"",amount:"",reason:""}
         if (airportevent.airportClosure) {
