@@ -7,7 +7,7 @@ function spinything() {
     rotatez = (Math.floor(-100 + Math.random()*(100 + 1 - -100)))/100
     $("#headendid").text("headend id: 0"+Math.round(Math.random()*100000))
     $("#serialnumber").text("serial number: TWCS"+"0"+Math.round(Math.random()*100000000))
-    $("#affilatename").text("affiliatename: WeatherPages Personal Cable")
+    $("#affilatename").text("affiliatename: Plus Network")
     $(".intellistarlogo").css( { transition: `transform 5s linear`,
     transform: `rotate3d(${rotatex}, ${rotatey}, ${rotatez}, ${.25 + Math.random()}turn)` } );
     setTimeout(function () {
